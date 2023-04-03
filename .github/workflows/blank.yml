@@ -1,0 +1,23 @@
+name: Check Docker Compose
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  check_docker_compose:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+    - name: Install Docker Compose
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y docker-compose
+    - name: Build and Start Docker Compose
+      run: docker-compose up -d
+      working-directory: ./path/to/docker/compose/files
+    - name: Check Container Status
+      run: docker-compose ps
+      working-directory: ./path/to/docker/compose/files
