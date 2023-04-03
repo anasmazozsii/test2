@@ -1,16 +1,23 @@
-name: Check Container
+name: Check Docker Compose
 
-on: [push]
+on:
+  push:
+    branches:
+      - main
 
 jobs:
-  check_container:
+  check_docker_compose:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v2
-    - name: Build Docker Image
-      run: docker build -t my-image .
-    - name: Run Docker Container
-      run: docker run --name my-container -d my-image
+    - name: Install Docker Compose
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y docker-compose
+    - name: Build and Start Docker Compose
+      run: docker-compose up -d
+      working-directory: ./path/to/docker/compose/files
     - name: Check Container Status
-      run: docker ps | grep my-container
+      run: docker-compose ps
+      working-directory: ./path/to/docker/compose/files
