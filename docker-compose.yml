@@ -1,7 +1,35 @@
 version: '3.7'
 
 services:
+  # --------------------------------------- DATABASES ------------------------------------------------------------------
+  incubateur_data_mysql:
+    image: mysql:8.0
+    ports:
+      - "3306:3306"
+    deploy:
+      restart_policy:
+        condition: on-failure
+        max_attempts: 3
+        delay: 20s
+    environment:
+      - MYSQL_DATABASE=sii
+      - MYSQL_ROOT_PASSWORD=root1234
+    networks:
+      - ingress
+#    env_file:
+#      - ../stack.env
+    volumes:
+      - incubateur_data_mysql_data:/var/lib/mysql
+
+volumes:
+  incubateur_data_mysql_data:
+
+networks:
+  ingress:
+    external: false
+
   # --------------------------------------- WEB SITES ------------------------------------------------------------------
+
   incubateur_data_phpmyadmin:
     image: phpmyadmin/phpmyadmin
     environment:
