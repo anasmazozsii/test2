@@ -19,5 +19,5 @@ jobs:
         docker compose -f docker-compose-web.yml up -d
     - name: Check Container Status
       run: |
-        docker compose ps
+        docker ps
         echo 'Done'
