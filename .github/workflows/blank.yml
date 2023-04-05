@@ -16,8 +16,8 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y docker-compose
     - name: Build and Start Docker Compose DB
-      run: docker-compose -f docker-compose-db up -d
+      run: docker-compose -f docker-compose-db.yml up -d
     - name: Build and Start Docker Compose WEB
-      run: docker-compose -f docker-compose-web up -d  
+      run: docker-compose -f docker-compose-web.yml up -d  
     - name: Check Container Status
       run: docker-compose ps
