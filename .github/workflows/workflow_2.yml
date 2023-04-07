@@ -23,7 +23,7 @@ jobs:
   deploy:
     needs: test
     runs-on: ubuntu-latest
-    if: ${{ job.status == 'success' }}
+    #if: ${{ job.status == 'success' }}
 
     steps:
       - uses: actions/checkout@v2
