@@ -14,4 +14,4 @@ jobs:
     - name: Build and Start Docker Compose WEB
       run: sudo docker compose -f docker-compose-web.yml up -d  
     - name: Check Container Status
-      run: docker ps
+      run: sudo docker ps
