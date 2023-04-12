@@ -1,5 +1,7 @@
-  # --------------------------------------- WEB SITES ------------------------------------------------------------------
+ version: '3.7'
 
+services:
+ # --------------------------------------- WEB SITES ------------------------------------------------------------------
   incubateur_data_phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
     environment:
@@ -12,7 +14,7 @@
         max_attempts: 3
         delay: 20s
     ports:
-      - "8080:80"
+      - "80:80"
     networks:
       - ingress
     external_links:
