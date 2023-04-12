@@ -1,7 +1,7 @@
   # --------------------------------------- WEB SITES ------------------------------------------------------------------
 
   incubateur_data_phpmyadmin:
-    image: phpmyadmin/phpmyadmin
+    image: phpmyadmin/phpmyadmin:latest
     environment:
       PMA_HOST: incubateur_data_mysql
       PMA_PORT: 3306
@@ -12,7 +12,7 @@
         max_attempts: 3
         delay: 20s
     ports:
-      - "3307:3307"
+      - "8080:80"
     networks:
       - ingress
     external_links:
