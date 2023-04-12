@@ -2,15 +2,15 @@ name: Check Docker Compose
 on:
   push:
     branches:
-      - main
+      - branch2
 jobs:
   docker_test:
     runs-on: self-hosted
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v2
-    #- name: Build and Start Docker Compose DB
-    #  run: sudo docker compose -f docker-compose-db.yml up -d
+    - name: Build and Start Docker Compose DB
+    - run: sudo docker compose -f docker-compose-db.yml up -d
     - name: Build and Start Docker Compose WEB
       run: sudo docker compose -f docker-compose-web.yml up -d  
     - name: Check Container Status
