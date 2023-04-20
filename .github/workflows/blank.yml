@@ -10,7 +10,7 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v2
     - name: Build and Start Docker Compose DB
-    - run: sudo docker compose -f docker-compose-db.yml up -d
+      run: sudo docker compose -f docker-compose-db.yml up -d
     - name: Build and Start Docker Compose WEB
       run: sudo docker compose -f docker-compose-web.yml up -d  
     - name: Check Container Status
