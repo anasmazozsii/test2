@@ -5,7 +5,8 @@ on:
       - main
 jobs:
   docker_test:
-    runs-on: Developpment-runner
+    runs-on: self-hosted
+    self-hosted: Developpment-runner
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v2
