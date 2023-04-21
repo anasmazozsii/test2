@@ -2,7 +2,7 @@ name: Check Docker Compose
 on:
   push:
     branches:
-      - branch2
+      - main
 jobs:
   docker_test:
     runs-on: Developpment-runner
