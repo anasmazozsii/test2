@@ -14,8 +14,8 @@ services:
     environment:
       - MYSQL_DATABASE=sii
       - MYSQL_ROOT_PASSWORD=root1234
-    networks:
-      - ingress
+ #   networks:
+ #     - ingress
 #    env_file:
 #      - ../stack.env
     volumes:
@@ -24,10 +24,10 @@ services:
 volumes:
   incubateur_data_mysql_data:
 
-networks:
-  ingress:
-    external: false
-#juste pour le test
+#networks:
+#  ingress:
+#    external: false
+
   # --------------------------------------------------------------------------------------------------------------------
 
 
