@@ -43,3 +43,17 @@ jobs:
       run: docker compose -f docker-compose-web.yml up -d
     - name: Check Container Status
       run: docker ps
+    - name: Get container status
+      run: |
+          container_status=$(docker ps --format "{{.Status}}")
+          if echo "$container_status" | grep -vq "Up"; then
+          echo "Error: Not all containers are running"
+          else
+          echo "All containers are running"
+          fi
+    - name: Get container ID(s) of crashed containers
+      run: |
+       CONTAINER_IDS=$(docker ps -aqf "status=exited")
+       if [ ! -z "$CONTAINER_IDS" ]; then
+       docker restart $CONTAINER_IDS
+       fi
