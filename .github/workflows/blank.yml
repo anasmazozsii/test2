@@ -4,15 +4,42 @@ on:
     branches:
       - main
 jobs:
-  docker_test:
-    runs-on: self-hosted
-    self-hosted: Developpment-runner
+  developpement:
+    runs-on: [self-hosted, linux, dev]
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v2
-    - name: Build and Start Docker Compose DB
-      run: sudo docker compose -f docker-compose-db.yml up -d
-    - name: Build and Start Docker Compose WEB
-      run: sudo docker compose -f docker-compose-web.yml up -d  
+    - name: Build and Start Docker Compose web and db
+      run: |
+        docker compose -f docker-compose-db.yml up -d
+        docker compose -f docker-compose-web.yml up -d
+    - name: Check container status
+      run: docker ps
+    - name: Stop and Remove Containers
+      run: |
+        docker compose -f docker-compose-db.yml down
+        docker compose -f docker-compose-web.yml down
+    - name: Check container status
+      run: docker ps
+      
+  preproduction:
+    needs: developpement
+    runs-on: [self-hosted, linux, preprod]
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+    - name: Build and Start Docker Compose db
+      run: docker compose -f docker-compose-db.yml up -d
+    - name: Check container status
+      run: docker ps
+      
+  production:
+    needs: preproduction
+    runs-on: [self-hosted, linux, prod]
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2 
+    - name: Build and Start Docker Compose web
+      run: docker compose -f docker-compose-web.yml up -d
     - name: Check Container Status
-      run: sudo docker ps
+      run: docker ps
